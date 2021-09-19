@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Gamebot</title>
+		<link
+			rel="icon"
+			href="https://actiniumn404.github.io/Gamebot/gamebot.png"
+		/>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+			body {
+				padding: 20px;
+				margin: 0px;
+				background: rgb(22, 22, 22);
+				color: white;
+			}
+			a {
+				color: rgb(67, 155, 255);
+				/*color:#fca21c;*/
+				text-decoration: none;
+				transition: filter 0.2s ease;
+			}
+			a:hover {
+				filter: brightness(1.3);
+				/*text-decoration: underline;*/
+			}
+			*,
+			*::before,
+			*::after {
+				font-family: "Open Sans", sans-serif;
+				box-sizing: border-box;
+			}
+			code pre {
+				font-family: monospace;
+			}
+			blockquote {
+				margin-left: 20px;
+				border-left: 5px solid #fca21c;
+				padding: 10px;
+				background: rgb(37, 37, 37);
+			}
+			code.multiline pre {
+				background: rgb(14, 14, 14);
+				padding: 20px;
+				margin: 5px;
+			}
+			code.singleline pre {
+				color: #fca21c;
+				display: inline;
+			}
+			header {
+				text-align: center;
+			}
+			hr {
+				width: 50%;
+				margin-bottom: 30px;
+			}
+			button {
+				margin: 10px;
+				border: 3px solid #fca21c;
+				padding: 10px;
+				background: none;
+				color: #ffb546;
+				font-weight: bold;
+				font-size: 20px;
+				border-radius: 4px;
+			}
+			button:hover {
+				opacity: 0.8;
+			}
+			button:active {
+				opacity: 0.5;
+			}
+
+			h2 a,
+			h3 a {
+				font-size: 0px;
+				transition: font-size 0.5s ease;
+			}
+			h2:hover a,
+			h3:hover a {
+				font-size: inherit;
+			}
+			#gbotpng {
+				border-radius: 100%;
+				height: 70px;
+				width: auto;
+				margin-right: 10px;
+			}
+			#gtitle {
+				font-size: 36px;
+				line-height: 70px;
+				display: flex;
+				justify-content: center;
+			}
+			#copyright {
+				text-align: center;
+				color: gray;
+				width: 100%;
+				display: inline-block;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<b
+				><span id="gtitle"
+					><img
+						src="https://actiniumn404.github.io/Gamebot/gamebot.png"
+						id="gbotpng"
+					/>Gamebot
+				</span></b
+			>
+			<h3>
+				<i><b>The best way to play games on Discord</b></i>
+			</h3>
+		</header>
+		<hr />
+
+		<div style="text-align: center">
+			Gamebot is a bot created by
+			<a href="https://discordapp.com/users/728297793646624819)"
+				>AndrewC10#6072</a
+			>, which allows you to play games like <i>Hangman</i> in
+			<i>Discord,</i> without having to contact some external website.
+			<br />
+			<i>Released under the GNU General Public License v3.0</i>
+			<br />
+			<a
+				href="https://discord.com/api/oauth2/authorize?client_id=886304776042737675&permissions=397284736064&scope=bot"
+				style="filter: none"
+				><button>Invite Me!!!</button></a
+			>
+		</div>
+
+		<h2 id="hangman"><b>Hangman</b></h2>
+		<h3 id="how-hangman-works">How it works</h3>
+		<blockquote>
+			<i>Hangman</i> is a classic game where a person, the host, gives a group
+			of people a word or a phrase, where the letters are obsured by a
+			placeholder, usually a dash. A player in the group will guess a letter,
+			and if that letter occurs in the word/phrase, the host will write out all
+			the letters matching that guessed letter in the word/phrase. If however,
+			the letter does not occur in the word or phrase, then an element of a
+			hanged man is drawn. If all the elements of the hanged man are drawn, then
+			the game ends.
+		</blockquote>
+		<h3 id="hangman-on-discord">How to play it in discord</h3>
+		<blockquote>
+			The game beings with the host tying in the command,
+			<code class="singleline"><pre>/newhangman WORD</pre></code>, with the
+			placeholder "WORD" repersenting the word being used in the hangman game.
+			Note that the host can also use the wildcard,
+			<code class="singleline"><pre>*</pre></code>, in which when used, will
+			generate a random word that even the host doesn't know. Anyways, after the
+			command is entered, the message will be immidiatly deleted, to prevent
+			cheaters, and a game ID, a five digit number, will be generated along with
+			the pattern. (To make multiple games at the same time possible)
+		</blockquote>
+
+		<blockquote>
+			After you get the game ID and pattern, any person in the channel can guess
+			a letter by typing
+			<code class="singleline"><pre>/hangman ID guess LETTER</pre></code> with
+			"ID" being the given game ID and "LETTER" being the guessed letter.
+		</blockquote>
+
+		<h3 id="hangman-notes">Notes:</h3>
+		<blockquote>
+			Note that you cannot include puncuation in your word/phrase--only English
+			letters and whitespace.
+		</blockquote>
+
+		<blockquote>
+			Note that the host can end a hangman game at any time by typing the
+			command
+			<code class="singleline"><pre>/hangman ID end game</pre></code> with "ID"
+			being the randomly generated game ID.
+		</blockquote>
+
+		<blockquote>
+			Note that the elements of the hangman are displayed via ASCII Art. For
+			example, the final stage of the hangman looks like this:
+
+			<code class="multiline">
+				<pre>
++ - |
+|   O
+|  \|/
+|  / \
+|______
+            </pre
+				>
+			</code>
+		</blockquote>
+		<br />
+		<h2 id="tic-tac-toe"><b>Tic Tac Toe</b></h2>
+		<h3 id="how-ttt-works">How it works</h3>
+		<blockquote>
+			<i>Tic tac toe</i> is a very old game that is played on a 3x3 grid by two
+			players. Those two players (<code class="singleline"><pre>X</pre></code>
+			and <code class="singleline"><pre>O</pre></code>) will alternate putting
+			pieces on the board. The first to have three in a row (whether it is in a
+			row, column, or diagonal) wins. If the whole board is filled up, and there
+			is no winner, then it is a tie.
+		</blockquote>
+		<h3 id="ttt-on-discord">How to play it on Discord</h3>
+		<blockquote>
+			To play, you will need to first create a game and send an invite to
+			another server member in which you want to play with. You can do this by
+			tying <code class="singleline"><pre>/newtictactoe USERNAME</pre></code>
+			<b
+				>with the USERNAME part being a <u>PING</u> to your opponent. It is
+				really important that it is a ping.</b
+			>
+			Anyways, after that, a game ID will be created.
+		</blockquote>
+
+		<blockquote>
+			If you are that user who was challenged to a match of tic tac toe, you can
+			accept the challenge by typing,
+			<code class="singleline"><pre>/tictactoe ID accept</pre></code> with "ID"
+			being the game ID. Simmilarly, you can decline by typing
+			<code class="singleline"><pre>>/tictactoe ID decline</pre></code> with
+			"ID" being the game ID.
+		</blockquote>
+
+		<blockquote>
+			To make a move, refer to the board below, and find the coordinate that you
+			want to play your move at. (e.g. C3) After that, simply type
+			<code class="singleline"><pre>/tictactoe ID play COORDINATE</pre></code>
+			with ID being the game id and COORDINATE being the coordinate that you
+			just chose.
+
+			<code class="multiline">
+				<pre>
+    1   2   3
+  +-----------+
+A |   |   |   |
+  |-----------|
+B |   |   |   |
+  |-----------|
+C |   |   |   |
+  +-----------+ 
+            </pre
+				>
+			</code>
+		</blockquote>
+		<span id="copyright"
+			>Website made by Actiniumn404. Please give credit if you want to use
+			this.</span
+		>
+
+		<script defer>
+			document.querySelectorAll("h2, h3").forEach((e) => {
+				if (e.hasAttribute("id")) {
+					e.innerHTML += `<a style="margin-left:5px;color:#fca21c;" href='${
+						window.location.pathname + "#" + e.id
+					}'>¶</a>`;
+				}
+			});
+		</script>
+	</body>
+</html>
