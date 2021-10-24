@@ -6,7 +6,7 @@
 		<title>Gamebot</title>
 		<link
 			rel="icon"
-			href="https://actiniumn404.github.io/Gamebot/gamebot.png"
+			href="/gamebot.png"
 		/>
 		<style>
 			@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
@@ -101,14 +101,46 @@
 				width: 100%;
 				display: inline-block;
 			}
+			th{
+				border: 1px solid white;
+				padding:10px;
+			}
+			.rpswin{
+				background-color: rgb(28, 73, 19);
+			}
+			.rpsdraw{
+				background-color: rgb(109, 109, 19);
+			}
+			.rpslose{
+				background-color: rgb(104, 27, 21);
+			}
+			@keyframes rainbow {
+				0% {filter: hue-rotate(0deg);}
+				25% {filter: hue-rotate(90deg);}
+				50% {filter: hue-rotate(180deg);}
+				75% {filter: hue-rotate(270deg);}
+				100% {filter: hue-rotate(360deg);}
+			}
 		</style>
+		<!--<script>
+			window.onscroll = function(){
+				if (window.scrollY >= window.innerHeight){
+					document.getElementById("ac404").style.color = "red"
+					counter = 0
+					i = setInterval(()=>{
+						counter++
+						document.getElementById("ac404").style.filter = `hue-rotate(${counter}deg)`
+					}, 50)
+				}
+			}
+		</script>-->
 	</head>
 	<body>
 		<header>
 			<b
 				><span id="gtitle"
 					><img
-						src="https://actiniumn404.github.io/Gamebot/gamebot.png"
+						src="/gamebot.png"
 						id="gbotpng"
 					/>Gamebot
 				</span></b
@@ -121,7 +153,7 @@
 
 		<div style="text-align: center">
 			Gamebot is a bot created by
-			<a href="https://discordapp.com/users/728297793646624819)"
+			<a target="_blank" href="https://discordapp.com/users/728297793646624819"
 				>AndrewC10#6072</a
 			>, which allows you to play games like <i>Hangman</i> in
 			<i>Discord,</i> without having to contact some external website.
@@ -129,11 +161,84 @@
 			<i>Released under the GNU General Public License v3.0</i>
 			<br />
 			<a
+				target="_blank"
 				href="https://discord.com/api/oauth2/authorize?client_id=886304776042737675&permissions=397284736064&scope=bot"
 				style="filter: none"
 				><button>Invite Me!!!</button></a
 			>
 		</div>
+
+		<h2 id="rps"><b>Rock, Paper, Scissors</b></h2>
+		<h3 id="how-rps-works">How it works</h3>
+		<blockquote>
+			<i>Rock, Paper, Scissors</i> is a very famous game where two people, (you
+			and gamebot in this case) each pick Rock, Paper, or Scissors and compare
+			who wins. You can use the table below to compare values if you are the player on the top row, and your opponent is playing the left row.
+			<table>
+				<tr>
+					<th>
+						Them\You
+					</th>
+					<th>
+						Rock
+					</th>
+					<th>
+						Paper
+					</th>
+					<th>
+						Scissors
+					</th>
+				</tr>
+				<tr>
+					<th>
+						Rock
+					</th>
+					<th class="rpsdraw">
+						Draw
+					</th>
+					<th class="rpswin">
+						Win, paper can wrap around rock
+					</th>
+					<th class="rpslose">
+						Lose, rock can smash scissors
+					</th>
+				</tr>
+				<tr>
+					<th>
+						Paper
+					</th>
+					<th class="rpslose">
+						Lose, paper can wrap around rock
+					</th>
+					<th class="rpsdraw">
+						Draw
+					</th>
+					<th class="rpswin">
+						Win, scissors can cut through paper 
+					</th>
+				</tr>
+				<tr>
+					<th>
+						Scissors
+					</th>
+					<th class="rpswin">
+						Win, rock can smash scissors
+					</th>
+					<th class="rpslose">
+						Lose, scissors can cut through paper
+					</th>
+					<th class="rpsdraw">
+						Draw
+					</th>
+				</tr>
+			</table>
+		</blockquote>
+		<h3 id="rps-on-discord">How to play it in discord</h3>
+		<blockquote>
+			To play with the gamebot, type the command <code class="singleline"><pre>!rps MOVE</pre></code> with "MOVE" being either r, p, or s for rock, paper, or scissors respectivly
+		</blockquote>
+
+		<br />
 
 		<h2 id="hangman"><b>Hangman</b></h2>
 		<h3 id="how-hangman-works">How it works</h3>
@@ -150,7 +255,7 @@
 		<h3 id="hangman-on-discord">How to play it in discord</h3>
 		<blockquote>
 			The game beings with the host tying in the command,
-			<code class="singleline"><pre>/newhangman WORD</pre></code>, with the
+			<code class="singleline"><pre>!newhangman WORD</pre></code>, with the
 			placeholder "WORD" repersenting the word being used in the hangman game.
 			Note that the host can also use the wildcard,
 			<code class="singleline"><pre>*</pre></code>, in which when used, will
@@ -163,7 +268,7 @@
 		<blockquote>
 			After you get the game ID and pattern, any person in the channel can guess
 			a letter by typing
-			<code class="singleline"><pre>/hangman ID guess LETTER</pre></code> with
+			<code class="singleline"><pre>!hangman ID guess LETTER</pre></code> with
 			"ID" being the given game ID and "LETTER" being the guessed letter.
 		</blockquote>
 
@@ -176,7 +281,7 @@
 		<blockquote>
 			Note that the host can end a hangman game at any time by typing the
 			command
-			<code class="singleline"><pre>/hangman ID end game</pre></code> with "ID"
+			<code class="singleline"><pre>!hangman ID end game</pre></code> with "ID"
 			being the randomly generated game ID.
 		</blockquote>
 
@@ -210,7 +315,7 @@
 		<blockquote>
 			To play, you will need to first create a game and send an invite to
 			another server member in which you want to play with. You can do this by
-			tying <code class="singleline"><pre>/newtictactoe USERNAME</pre></code>
+			tying <code class="singleline"><pre>!newtictactoe USERNAME</pre></code>
 			<b
 				>with the USERNAME part being a <u>PING</u> to your opponent. It is
 				really important that it is a ping.</b
@@ -221,16 +326,16 @@
 		<blockquote>
 			If you are that user who was challenged to a match of tic tac toe, you can
 			accept the challenge by typing,
-			<code class="singleline"><pre>/tictactoe ID accept</pre></code> with "ID"
+			<code class="singleline"><pre>!tictactoe ID accept</pre></code> with "ID"
 			being the game ID. Simmilarly, you can decline by typing
-			<code class="singleline"><pre>>/tictactoe ID decline</pre></code> with
+			<code class="singleline"><pre>!tictactoe ID decline</pre></code> with
 			"ID" being the game ID.
 		</blockquote>
 
 		<blockquote>
 			To make a move, refer to the board below, and find the coordinate that you
 			want to play your move at. (e.g. C3) After that, simply type
-			<code class="singleline"><pre>/tictactoe ID play COORDINATE</pre></code>
+			<code class="singleline"><pre>!tictactoe ID play COORDINATE</pre></code>
 			with ID being the game id and COORDINATE being the coordinate that you
 			just chose.
 
@@ -249,13 +354,13 @@ C |   |   |   |
 			</code>
 		</blockquote>
 		<span id="copyright"
-			>Website made by Actiniumn404. Please give credit if you want to use
+			>Website made by <span style="color:rgb(202, 202, 202)" id="ac404">Actiniumn404</span>. Please give credit if you want to use
 			this.</span
 		>
 
 		<script defer>
 			document.querySelectorAll("h2, h3").forEach((e) => {
-				if (e.hasAttribute("id")) {
+				if (e.hasAtthibute("id")) {
 					e.innerHTML += `<a style="margin-left:5px;color:#fca21c;" href='${
 						window.location.pathname + "#" + e.id
 					}'>¶</a>`;

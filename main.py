@@ -92,7 +92,14 @@ async def on_message(message):
   tttplay = re.match("!tictactoe ([0-9]+) play ([A-Ca-c])([1-3])", message.content)
   if tttplay:
     await tictactoe.play(message, tttplay)
-    
+
+  # battleship
+  newship = re.match("!newbattleship\n```\n(.*)\n```", message.content, flags=re.MULTILINE | re.DOTALL)
+  if newship:
+    matrix = newship.group(1)
+    matrix = matrix.split("\n")
+    matrix = [x.replace("_", " ").split(" ") for x in matrix]
+    await battleship.new(message, matrix)    
 
 
 client.run(os.getenv('TOKEN'))

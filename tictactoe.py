@@ -3,21 +3,27 @@ import random
 
 tictactoe = {}
 async def new(message, ttt):
-  while True:
-      id = random.randint(10000, 99999)
-      if id not in list(tictactoe.keys()):
-        break
-  tictactoe[id] = [int(message.author.id), int(ttt.group(1)[3:-1]), False, [" "]*9, 0]
+	embed = discord.Embed(
+		title="Tic tac toe",
+		color=discord.Color.from_rgb(252, 164, 28)
+	)
+	embed.set_author(name=f"Gamebot")
+	embed.set_footer(text=f"For all gamebot commands, type gamebot!help")
 
-  embed = discord.Embed(
-    title="Tic tac toe",
-    color=discord.Color.from_rgb(252, 164, 28)
-  )
-  embed.set_author(name=f"Gamebot")
-  embed.set_footer(text=f"For all gamebot commands, type gamebot!help")
-  embed.add_field(name="An invitation", value=f"{ttt.group(1)}, you have been challenged to tic tac toe game number {str(id)} by {str(message.author)}. Will you decline or accept?", inline=False)
-  embed.add_field(name="How to accept/decline", value=f"Please type `!tictactoe {str(id)} decline` to decline and `!tictactoe {str(id)} accept` to accept", inline=True)
-  await message.reply(embed=embed, mention_author=False)
+	if "<@!" not in ttt.group(1):
+		embed.add_field(name="ERROR", value=f"`YOU DIDN'T @ MENTION YOUR CHALLENGER`", inline=False)
+		await message.reply(embed=embed, mention_author=False)
+		return
+
+	while True:
+		id = random.randint(10000, 99999)
+		if id not in list(tictactoe.keys()):
+			break
+	tictactoe[id] = [int(message.author.id), int(ttt.group(1)[3:-1]), False, [" "]*9, 0]
+
+	embed.add_field(name="An invitation", value=f"{ttt.group(1)}, you have been challenged to tic tac toe game number {str(id)} by {str(message.author)}. Will you decline or accept?", inline=False)
+	embed.add_field(name="How to accept/decline", value=f"Please type `!tictactoe {str(id)} decline` to decline and `!tictactoe {str(id)} accept` to accept", inline=True)
+	await message.reply(embed=embed, mention_author=False)
 
 
 async def invite(message, tttinvite):
@@ -74,7 +80,7 @@ async def play(message, tttplay):
     embed.add_field(name="ERROR", value="`ERROR: IT IS NOT YOUR TURN YET.`")
   else:
     if tictactoe[id][3][row+col] != " ":
-      embed.add_field(name="ERROR", value="`ERROR: DON'T BE THAT JERK WHO REPLACES A PREVIOUS MOVE`")
+    	embed.add_field(name="ERROR", value="`ERROR: DON'T BE THAT JERK WHO REPLACES A PREVIOUS MOVE`")
     else:
       tictactoe[id][3][row+col] = ("X" if tictactoe[id][4] == 0 else "O")
       tictactoe[id][4] = 1 - tictactoe[id][4]

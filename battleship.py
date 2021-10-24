@@ -1,6 +1,12 @@
-def b_validate(message, matrix):
+import discord
+import random
+
+games = {}
+
+def validate(matrix):
   err = False
   checklist = [1, 2, 3, 4, 5]
+  letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
   for col in range(len(matrix)):
       for row in range(len(matrix[col])):
           j = matrix[col][row]
@@ -25,7 +31,7 @@ def b_validate(message, matrix):
                       if " " in "".join([str(x) for x in ship]).strip(" "+"".join([str(x) for x in cols])):
                           error[0].append(True)
                       elif "".join([str(x) for x in ship]).count(str(j)) != j:
-                          error[1].append(True)
+                          error[1].append("".join([str(x) for x in ship]).count(str(j)))
                       else:
                           whichloc = 0
                   cols = []
@@ -44,9 +50,11 @@ def b_validate(message, matrix):
                   else:
                       err = True
                       if any(error[0]):
-                          return "Invalid! There is a *hole* in your ship"
+                          return f"There is a hole in ship #{str(j)} ({letters[col]}{str(row+1)})"
+                          #return 1
                       else:
-                          return "Invalid number of pegs for a ship"
+                          return f"Why does the ship that takes up {str(j)} spaces ({letters[col]}{str(row+1)}) take up not that many spaces???"
+                          #return 2
 
 
                   for shipConponent in cols:
@@ -54,9 +62,28 @@ def b_validate(message, matrix):
                           matrix[shipConponent][row] = " "
                   checklist.pop(checklist.index(j))
               else:
-                  return "You have either placed a ship that you have already placed, or have placed a ship with an invalid number of spots. Only ships that occupy 1-5 spots are allowed."
+                  return f"You have placed more than one {str(j)} ship at ({letters[col]}{str(row+1)}"
+                  #return 3
 
   if checklist != []:
-      return "You have not placed down all your ships yet."
+      x = ", ".join( list( map(str, checklist) ) )
+      return f"You have not placed down ships { x } yet"
+      #return 4
   elif not err:
-      return "true"
+      return 0
+
+
+async def new(message, challenger):
+	embed = discord.Embed(
+		title="Tic tac toe",
+		color=discord.Color.from_rgb(252, 164, 28)
+	)
+	embed.set_author(name=f"Gamebot")
+	embed.set_footer(text=f"For all gamebot commands, type gamebot!help")
+	if "<@!" not in challenger:
+		embed.add_field(name="An invitation", value=f"", inline=False)
+		return
+
+		
+
+	await message.reply(embed=embed, mention_author=False)
